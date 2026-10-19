@@ -774,9 +774,9 @@ header
         {
             position: absolute;
             z-index: 5;
+            inset: auto;
             top: anchor(bottom);
             left: anchor(left);
-            inset: auto;
 
             display: none;
             align-content: stretch;

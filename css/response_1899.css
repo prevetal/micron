@@ -441,6 +441,40 @@
 
 
 
+    /*--------------
+        Products
+    --------------*/
+    .products
+    {
+        .product
+        {
+            padding-block: var(--inner_gap) var(--block_padding_s);
+            padding-inline: var(--inner_gap);
+
+
+            .btn
+            {
+                height: 48px;
+
+                font-size: var(--font_size_s);
+            }
+
+
+            @media (hover: hover) and (pointer: fine)
+            {
+                &:hover
+                {
+                    .info
+                    {
+                        transform: translateY(-36px);
+                    }
+                }
+            }
+        }
+    }
+
+
+
     /*------------
         Footer
     ------------*/

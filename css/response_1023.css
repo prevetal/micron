@@ -433,7 +433,10 @@
     {
         .images
         {
+            position: relative;
+
             width: 100%;
+            margin-bottom: var(--inner_gap);
 
 
             .thumbs
@@ -863,6 +866,15 @@
                     width: calc(50% - var(--inner_gap_xs) / 2);
                 }
             }
+
+
+            .lines
+            {
+                span
+                {
+                    display: none;
+                }
+            }
         }
     }
 
@@ -965,6 +977,26 @@
             justify-content: center;
 
             width: 100%;
+        }
+    }
+
+
+
+    /*------------------------
+        PopUp - Case modal
+    ------------------------*/
+    .case_modal
+    {
+        .image
+        {
+            width: calc(100% - 320px);
+        }
+
+
+        .data
+        {
+            width: 320px;
+            padding: var(--inner_gap_l);
         }
     }
 }

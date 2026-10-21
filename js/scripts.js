@@ -361,6 +361,42 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById(id).showModal()
 	})
 
+
+
+	$(document).on('click', '[data-open-modal-ajax]', function(e) {
+		e.preventDefault()
+
+		const $btn = $(this).closest('[data-open-modal-ajax]'),
+			url = $btn.data('src')
+
+		if (!url) {
+			console.error('Нет data-src у кнопки')
+			return
+		}
+
+		$.ajax({
+			url: url,
+			method: 'GET',
+			success: function(html) {
+				const $html = $(html),
+					id = $html.attr('id')
+
+				if (id) {
+					$('#' + id).remove()
+				}
+
+				$('body').append($html)
+
+				const dialog = id ? document.getElementById(id) : $html[0]
+
+				dialog.showModal()
+			},
+			error: function() {
+				console.error('Не удалось загрузить модалку по адресу ' + url)
+			}
+		})
+	})
+
 	$(document).on('click', '[data-close-modal]', function() {
 		$(this).closest('dialog')[0].close()
 	})
@@ -736,6 +772,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	// Sizes table - highlighting row and column
+	const sizesTable = document.querySelector('.sizes_table')
+
+	if (sizesTable) {
+		const sizeSelectors = sizesTable.querySelectorAll('[data-size-axis]'),
+			sizeResult = sizesTable.querySelector('[data-size-result]')
+
+		const updateSizeResult = () => {
+			const height = sizesTable.querySelector('[data-size-axis="height"]')?.value,
+				width = sizesTable.querySelector('[data-size-axis="width"]')?.value,
+				widthHeaders = [...sizesTable.querySelectorAll('thead th.dark')],
+				widthIndex = widthHeaders.findIndex(header => header.textContent.trim() === width),
+				heightRow = [...sizesTable.querySelectorAll('tbody tr')].find(row =>
+					row.querySelector('td.dark')?.textContent.trim() === height
+				),
+				sizeLink = heightRow?.querySelectorAll('td')[widthIndex + 1]?.querySelector('a')
+
+			if (!sizeResult || !sizeLink) return
+
+			sizeResult.href = sizeLink.href
+			sizeResult.textContent = `${sizeLink.textContent.trim()} мм`
+		}
+
+		sizeSelectors.forEach(select => select.addEventListener('change', updateSizeResult))
+		updateSizeResult()
+	}
+
 	$('body').on('mouseenter', '.sizes_table td:not(.dark)', function() {
 		let index = $(this).index()
 

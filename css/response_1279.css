@@ -210,6 +210,12 @@
         }
 
 
+        .images
+        {
+            position: relative;
+        }
+
+
         .empty
         {
             display: none;
@@ -435,6 +441,21 @@
         .grid_row
         {
             --items_per_line: 4;
+        }
+
+
+        .product
+        {
+            .info
+            {
+                transform: translateY(-40px);
+            }
+
+
+            .btn
+            {
+                transform: translateY(-100%);
+            }
         }
     }
 
@@ -1068,6 +1089,8 @@
     {
         .data
         {
+            position: relative;
+
             width: 100%;
 
 
@@ -1134,6 +1157,56 @@
         .menu
         {
             display: none;
+        }
+    }
+
+
+
+    /*------------------------
+        PopUp - Case modal
+    ------------------------*/
+    .case_modal
+    {
+        .image
+        {
+            width: calc(100% - 360px);
+        }
+
+
+        .data
+        {
+            width: 360px;
+            padding: var(--block_padding_s);
+
+
+            .desc
+            {
+                font-size: var(--font_size_s);
+            }
+
+
+            .features
+            {
+                gap: var(--inner_gap);
+
+
+                & > *
+                {
+                    gap: 4px;
+                }
+
+
+                .val
+                {
+                    font-size: var(--font_size);
+                }
+            }
+
+
+            .link
+            {
+                height: 56px;
+            }
         }
     }
 }
